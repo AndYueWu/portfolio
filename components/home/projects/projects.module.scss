@@ -101,3 +101,12 @@
 
   margin: 0.8rem 0;
 }
+
+.link{
+  color: var(--brand);
+  text-decoration: underline;
+  font-weight: 700;
+}
+.link:hover{
+  opacity: 0.85;
+}

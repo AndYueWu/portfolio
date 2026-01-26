@@ -79,3 +79,10 @@
 .sideBar::-webkit-scrollbar {
   display: none;
 }
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}

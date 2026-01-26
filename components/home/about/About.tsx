@@ -11,30 +11,26 @@ export const About = () => {
       <SectionHeader title="About" dir="l" />
       <div className={styles.about}>
         <div>
-          <Reveal>
-            <p className={`${styles.aboutText} ${styles.highlightFirstLetter}`}>
-              Howdy! I&apos;m John Carlo Devera, and I&apos;m a Bachelor of Science in Information Technology graduate.
-              <br/><br/>
-              I have experience working in both the mobile and web development worlds, with a focus on frontend development. I&apos;m passionate about creating beautiful, responsive websites that provide a great user experience.
-             </p>
-          </Reveal>
+        <Reveal>
+          <p className={`${styles.aboutText} ${styles.highlightFirstLetter}`}>
+            Hi! I&apos;m Yue WU (Andy). I&apos;m a PhD candidate at CityU Hong Kong. Before that, I earned an MSc in Applied Mathematics from Imperial College London and a BSc in Mathematics &amp; Statistics from Queen Mary University of London.
+            <br/><br/>
+             I want to be a bridge between the software and hardware: someone who understands both sides, can communicate across the boundary, and builds full-stack systems that are efficient, reliable, and genuinely useful to people.
+          </p>
+        </Reveal>
           <Reveal>
             <p className={styles.aboutText}>
-              My skills include HTML, CSS, JavaScript, and various frontend frameworks like React and Vue.js. 
-              I&apos;ve also worked with backend technologies like Node.js, Firebase, MongoDB and PHP/Laravel , allowing me to build full-stack applications.
+             My current focus are RISC-V architecture and inference optimization.
             </p>
           </Reveal>
           <Reveal>
             <p className={styles.aboutText}>
-              When I&apos;m not coding, I enjoy digital painting. 
-              I believe that maintaining a healthy work-life balance is crucial for staying productive and motivated.
+              I&apos;m also an ameture MMA figher and drummer.
             </p>
           </Reveal>
           <Reveal>
             <p className={styles.aboutText}>
-              I&apos;m always looking for new challenges and opportunities to learn and grow as a developer. 
               If you&apos;re interested in working together or have any questions, please don&apos;t hesitate to get in touch!
-              🔗
             </p>
           </Reveal>
           <Reveal>

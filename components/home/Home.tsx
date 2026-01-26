@@ -4,8 +4,8 @@ import { Hero } from "./hero/Hero";
 import styles from "./home.module.scss";
 import { Heading } from "../nav/Heading";
 import { About } from "./about/About";
-import { Projects } from "./projects/Projects";
 import { Experience } from "./experience/Experience";
+import { Projects } from "./projects/Projects";
 import { Contact } from "./contact/Contact";
 
 export const Home = () => {
@@ -17,8 +17,8 @@ export const Home = () => {
           <Heading />
           <Hero />
           <About />
-          <Projects />
           <Experience />
+          <Projects />
           <Contact />
           <div
             style={{

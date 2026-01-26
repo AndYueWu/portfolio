@@ -18,9 +18,10 @@
 }
 
 .statGrid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.2rem;
-
-  margin-bottom: 4.8rem;
+  display: grid;
+  grid-template-columns: 1fr; /* 一行一个 */
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;           /* 你想统一的宽度，自己调 */
+  margin-bottom: 28px;
 }

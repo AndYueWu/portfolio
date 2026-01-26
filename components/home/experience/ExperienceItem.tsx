@@ -5,18 +5,14 @@ interface Props {
   title: string;
   position: string;
   time: string;
-  location: string;
   description: string;
-  tech: string[];
 }
 
 export const ExperienceItem = ({
   title,
   position,
   time,
-  location,
   description,
-  tech,
 }: Props) => {
   return (
     <div className={styles.experience}>
@@ -33,21 +29,9 @@ export const ExperienceItem = ({
         <Reveal>
           <span className={styles.position}>{position}</span>
         </Reveal>
-        <Reveal>
-          <span>{location}</span>
-        </Reveal>
       </div>
       <Reveal>
         <p className={styles.description}>{description}</p>
-      </Reveal>
-      <Reveal>
-        <div className={styles.tech}>
-          {tech.map((item) => (
-            <span key={item} className="chip">
-              {item}
-            </span>
-          ))}
-        </div>
       </Reveal>
     </div>
   );

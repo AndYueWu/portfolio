@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import styles from "./sidebar.module.scss";
 import { motion } from "framer-motion";
+import Image from "next/image";
+
 
 export const SideBar = () => {
   const [selected, setSelected] = useState("");
@@ -33,12 +35,21 @@ export const SideBar = () => {
         transition={{ duration: 0.5 }}
         className={styles.sideBar}
       >
-        <span className={styles.logo} onClick={() => {
-          document.location.hash === "" ?
-          document.getElementById("main")?.scrollIntoView() :
-          document.location.hash = '';
-          }}>
-          JC<span>.</span>
+        <span
+          className={styles.logo}
+          onClick={() => {
+            document.location.hash === ""
+              ? document.getElementById("main")?.scrollIntoView()
+              : (document.location.hash = "");
+          }}
+        >
+          <Image
+            src="/favicon.png"
+            alt="AYW logo"
+            width={80}
+            height={80}
+            priority
+          />
         </span>
         <motion.a
           initial={{ x: -70 }}
@@ -55,6 +66,16 @@ export const SideBar = () => {
         <motion.a
           initial={{ x: -70 }}
           animate={{ x: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          href="#experience"
+          onClick={() => setSelected("experience")}
+          className={selected === "experience" ? styles.selected : ""}
+        >
+          Publication
+        </motion.a>
+        <motion.a
+          initial={{ x: -70 }}
+          animate={{ x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           href="#projects"
           onClick={() => setSelected("projects")}
@@ -62,16 +83,7 @@ export const SideBar = () => {
         >
           Projects
         </motion.a>
-        <motion.a
-          initial={{ x: -70 }}
-          animate={{ x: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          href="#experience"
-          onClick={() => setSelected("experience")}
-          className={selected === "experience" ? styles.selected : ""}
-        >
-          Exp.
-        </motion.a>
+        
         <motion.a
           initial={{ x: -70 }}
           animate={{ x: 0 }}

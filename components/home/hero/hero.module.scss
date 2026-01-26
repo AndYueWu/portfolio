@@ -45,8 +45,12 @@
 
 .aboutCopy {
   margin: 2.4rem 0;
-  max-width: 700px;
+  max-width: 65ch;      // 用字符宽度控制行长，更“统一”
   font-weight: 200;
+
+  text-align: justify;  // 两端对齐（就是你说的“最后一个”）
+  text-justify: inter-word;
+  hyphens: auto;        // 英文断词更自然（需要 lang="en" 更好）
 }
 
 .profile {
@@ -92,3 +96,48 @@
     }
   }
 }
+
+
+
+
+.stripeGrid {
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  right: 3.6rem;
+  width: min(75%, 520px);
+  z-index: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0.55;
+  pointer-events: auto;
+}
+
+.stripe {
+  position: absolute;
+  top: -40%;
+  height: 180%;
+  width: 50px;
+  background: rgba(245, 245, 240, 0.9);
+  transform: rotate(-25deg);
+  border-radius: 8px;
+
+  transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
+  transform-origin: center;
+}
+
+.stripe:hover {
+  transform: rotate(-25deg) translateY(-8px) scale(2);
+  opacity: 1;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.25));
+}
+
+.stripeGrid:hover .stripe { opacity: 0.35; }
+.stripeGrid:hover .stripe:hover { opacity: 1; }
+
+.stripe:nth-child(1) { left: 10%; }
+.stripe:nth-child(2) { left: 28%; }
+.stripe:nth-child(3) { left: 46%; }
+.stripe:nth-child(4) { left: 64%; }
+.stripe:nth-child(5) { left: 82%; }

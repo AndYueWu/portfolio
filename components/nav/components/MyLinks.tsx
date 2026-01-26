@@ -6,6 +6,9 @@ import {
   AiFillYoutube,
   AiFillSkype
 } from "react-icons/ai";
+import { SiGooglescholar } from "react-icons/si"
+import { SiBilibili } from "react-icons/si";
+
 import Link from "next/link";
 import { motion } from "framer-motion";
 
@@ -17,7 +20,7 @@ export const MyLinks = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.0 }}
       >
-        <Link href="https://www.linkedin.com/in/john-carlo-devera-5240761b6/" target="_blank" rel="nofollow">
+        <Link href="https://www.linkedin.com/in/yue-wu-8713a2279/" target="_blank" rel="nofollow">
           <AiFillLinkedin size="2.4rem" />
         </Link>
       </motion.span>
@@ -27,8 +30,8 @@ export const MyLinks = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
       >
-        <Link href="https://join.skype.com/invite/vKVMgi5SGjvM" target="_blank" rel="nofollow">
-          <AiFillSkype size="2.4rem" />
+        <Link href="https://scholar.google.com/citations?hl=zh-CN&user=ALARddEAAAAJ" target="_blank" rel="nofollow">
+          <SiGooglescholar size="2.4rem" />
         </Link>
       </motion.span>
 
@@ -37,7 +40,7 @@ export const MyLinks = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.2 }}
       >
-        <Link href="https://github.com/jcdevz-dev" target="_blank" rel="nofollow">
+        <Link href="https://github.com/AndYueWu" target="_blank" rel="nofollow">
           <AiFillGithub size="2.4rem" />
         </Link>
       </motion.span>
@@ -47,8 +50,8 @@ export const MyLinks = () => {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       >
-        <Link href="https://www.instagram.com/aluckyfin/" target="_blank" rel="nofollow">
-          <AiFillInstagram size="2.4rem" />
+        <Link href="https://space.bilibili.com/3546864041330969?spm_id_from=333.1007.0.0" target="_blank" rel="nofollow">
+          <SiBilibili  size="2.4rem" />
         </Link>
       </motion.span>
 

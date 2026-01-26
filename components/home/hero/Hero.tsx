@@ -9,23 +9,22 @@ import Profile from "@/public/jc.jpg";
 export const Hero = () => {
   return (
     <section className={`section-wrapper ${styles.hero}`}>
-      <div className={styles.heroGrid}>
+      <div className={styles.heroGrid}> 
         <div className={styles.copyWrapper}>
           <Reveal>
             <h1 className={styles.title}>
-              Hi, I&apos;m JC<span>.</span>
+            <span> Andy </span> Yue WU 
             </h1>
           </Reveal>
           <Reveal>
             <h2 className={styles.subTitle}>
-              I&apos;m a <span>Frontend Developer</span>
+              EE PhD Candidate in <br /> <span>City University of HongKong</span>
             </h2>
           </Reveal>
           <Reveal>
             <p className={styles.aboutCopy}>
-              I&apos;ve spent the last 3 years building and scaling applications for
-              some pretty cool companies and individuals. I also create interesting self projects on my spare time.
-              Let&apos;s connect!
+            I am a PhD student at the CityUHK Architecture Laboratory for Arithmetic and Security (CALAS), supervised by Prof. Ray C. C. Cheung. <br /><br />
+My research focuses on efficient machine learning. In particular, I aim to become an expert in hardware–software co-design by integrating software optimization and hardware acceleration to bring energy-efficient intelligence to organizations, families, and everyday devices.
             </p>
           </Reveal>
           <Reveal>
@@ -44,13 +43,20 @@ export const Hero = () => {
             className={styles.profile}
             src={Profile}
             priority
-            alt="John Carlo Devera | Frontend Developer"
+            alt="Yue Wu (Andy) — PhD student at CityUHK"
             width={250}
             height={250}
           />
         </motion.div>
       </div>
-      <DotGrid />
+      <div className={styles.stripeGrid} aria-hidden="true">
+        <span className={styles.stripe} />
+        <span className={styles.stripe} />
+        <span className={styles.stripe} />
+        <span className={styles.stripe} />
+        <span className={styles.stripe} />
+      </div>
+     {/* <DotGrid /> */}
     </section>
   );
 };
