@@ -3,15 +3,15 @@ import styles from "./experience.module.scss";
 
 interface Props {
   title: string;
-  position: string;
   time: string;
+  location:string
   description: string;
 }
 
 export const ExperienceItem = ({
   title,
-  position,
   time,
+  location,
   description,
 }: Props) => {
   return (
@@ -25,11 +25,11 @@ export const ExperienceItem = ({
         </Reveal>
       </div>
 
-      <div className={styles.heading}>
-        <Reveal>
-          <span className={styles.position}>{position}</span>
-        </Reveal>
-      </div>
+      <Reveal>
+        <p className={styles.description}>{location}</p>
+      </Reveal>
+
+
       <Reveal>
         <p className={styles.description}>{description}</p>
       </Reveal>
