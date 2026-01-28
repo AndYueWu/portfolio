@@ -50,7 +50,7 @@ export const SideBar = () => {
             height={80}
             priority
           />
-        </span>
+        </span> 
         <motion.a
           initial={{ x: -70 }}
           animate={{ x: 0 }}

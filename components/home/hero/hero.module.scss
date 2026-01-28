@@ -141,3 +141,64 @@
 .stripe:nth-child(3) { left: 46%; }
 .stripe:nth-child(4) { left: 64%; }
 .stripe:nth-child(5) { left: 82%; }
+
+
+
+.riBlock {
+  margin-top: 2rem;
+}
+
+.riTitle {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 1rem;
+}
+
+/* 横向排列，自动换行 */
+.riGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 700px; // 你想更长就调大
+}
+
+/* 横向 chip：宽度自适应内容 */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.6rem 1.1rem;  // 关键：横向用 padding 而不是 width:100%
+  height: 36px;
+  box-sizing: border-box;
+
+  background: var(--brand);
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 6px;
+  box-shadow: 3px 3px 0 #000;
+
+  font-family: "IBM Plex Mono", "JetBrains Mono", ui-monospace, SFMono-Regular,
+    Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap; // 不换行
+}
+
+
+.contactBtn {
+  background: #000;
+  color: var(--brand);
+  border: 2px solid var(--brand);
+  box-shadow: 3px 3px 0 var(--brand);
+  font-family: "IBM Plex Mono","JetBrains Mono",ui-monospace,monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.contactBtn:hover {
+  transform: translateY(-1px);
+}

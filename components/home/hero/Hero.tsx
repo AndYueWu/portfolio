@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { StandardButton } from "@/components/buttons/StandardButton";
 import { Reveal } from "@/components/utils/Reveal";
 import { DotGrid } from "./DotGrid";
+import { AiFillCode, AiFillSmile } from "react-icons/ai";
 import styles from "./hero.module.scss";
 import Profile from "@/public/jc.jpg";
 
@@ -18,7 +19,7 @@ export const Hero = () => {
           </Reveal>
           <Reveal>
             <h2 className={styles.subTitle}>
-              EE PhD Candidate in <br /> <span>City University of HongKong</span>
+              EE PhD Student in <br /> <span>City University of HongKong</span>
             </h2>
           </Reveal>
           <Reveal>
@@ -27,12 +28,27 @@ export const Hero = () => {
 My research focuses on efficient machine learning. In particular, I aim to become an expert in hardware–software co-design by integrating software optimization and hardware acceleration to bring energy-efficient intelligence to organizations, families, and everyday devices.
             </p>
           </Reveal>
+
+          
           <Reveal>
             <StandardButton
               onClick={() => document.getElementById("contact")?.scrollIntoView()}
             >
               Contact me
             </StandardButton>
+          </Reveal>
+
+
+          <Reveal>
+            <div className={styles.riBlock}>
+              <div className={styles.riTitle}>Research Interests</div>
+              <div className={styles.riGrid}>
+                <span className={styles.chip}>Efficient AI</span>
+                <span className={styles.chip}>RISC-V</span>
+                <span className={styles.chip}>Inference Optimization</span>
+                <span className={styles.chip}>Hardware–Software Co-Design</span>
+              </div>
+            </div>
           </Reveal>
         </div>
         <motion.div
@@ -57,6 +73,10 @@ My research focuses on efficient machine learning. In particular, I aim to becom
         <span className={styles.stripe} />
       </div>
      {/* <DotGrid /> */}
+
+     
     </section>
+
+    
   );
 };
