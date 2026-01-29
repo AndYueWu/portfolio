@@ -1,0 +1,98 @@
+.timeline {
+    margin-top: 2.4rem;
+    max-width: 900px;
+  }
+  
+  .item {
+    display: grid;
+    grid-template-columns: 120px 22px 1fr;
+    gap: 1.2rem;
+    padding: 0.9rem 0;
+  }
+  
+  .date {
+    font-size: 1.4rem;
+    opacity: 0.75;
+    letter-spacing: 0.02em;
+    padding-top: 0.15rem;
+  }
+  
+  .axis {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: var(--brand);
+    border: 2px solid #000;
+    box-shadow: 2px 2px 0 #000;
+    margin-top: 0.35rem;
+  }
+  
+  .line {
+    position: absolute;
+    top: 1.2rem;
+    bottom: -1.1rem;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.18);
+  }
+  
+  .event {
+    font-size: 1.6rem;
+    line-height: 1.7;
+    opacity: 0.95;
+  }
+  
+  .actions {
+    margin-top: 1.4rem;
+  }
+  
+  .toggle {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: var(--text);
+    padding: 0.9rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: 0.15s opacity;
+  }
+  
+  .toggle:hover {
+    opacity: 0.7;
+  }
+  
+  /* Mobile: 变成上下两行，时间在上，内容在下 */
+  @media (max-width: 768px) {
+    .item {
+      grid-template-columns: 18px 1fr;
+      grid-template-areas:
+        "axis date"
+        "axis event";
+      gap: 0.6rem 1.2rem;
+      padding: 1.1rem 0;
+    }
+  
+    .date {
+      grid-area: date;
+      padding-top: 0;
+    }
+  
+    .axis {
+      grid-area: axis;
+      justify-content: flex-start;
+    }
+  
+    .event {
+      grid-area: event;
+    }
+  
+    .line {
+      bottom: -1.6rem;
+    }
+  }

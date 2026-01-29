@@ -3,10 +3,10 @@ import { SideBar } from "../nav/SideBar";
 import { Hero } from "./hero/Hero";
 import styles from "./home.module.scss";
 import { Heading } from "../nav/Heading";
-import { About } from "./about/About";
 import { Experience } from "./experience/Experience";
 import { Projects } from "./projects/Projects";
 import { Contact } from "./contact/Contact";
+import { News } from "./news/News";
 
 export const Home = () => {
   return (
@@ -16,7 +16,7 @@ export const Home = () => {
         <main id="main">
           <Heading />
           <Hero />
-          <About />
+          <News/>
           <Experience />
           <Projects />
           <Contact />
