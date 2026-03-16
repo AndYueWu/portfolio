@@ -1,0 +1,501 @@
+/* =========================================
+   header.module.scss
+   ========================================= */
+
+   @font-face {
+    font-family: "DigitTech";
+    src: url("/fonts/Digital_tech.otf") format("opentype");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+  }
+  
+  /* ================================
+     1. Layout
+     ================================ */
+  
+  .mainContainer {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  .heroSection {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  
+    width: 100%;
+    height: 100vh;
+  
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  
+    background-color: var(--bg);
+    overflow: hidden;
+  }
+  
+  .mainSection {
+    position: relative;
+    z-index: 50;
+    width: 100%;
+    min-height: 100vh;
+    padding: 0;
+  }
+  
+  /* ================================
+     2. Hero inner
+     ================================ */
+  
+  .dotTitleWrap {
+    width: 100%;
+    max-width: 1200px;
+    min-height: 160px;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+  
+  .bioInfoBox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  
+    margin-top: 2rem;
+  
+    font-family: "JetBrains Mono", monospace;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--ink);
+  
+    .bracket {
+      color: var(--pool);
+      margin: 0 10px;
+    }
+  
+    .terminalCursor {
+      display: inline-block;
+      width: 10px;
+      height: 1.1em;
+      margin-left: 8px;
+      background-color: var(--sun);
+      animation: blinker 1s steps(2) infinite;
+    }
+  }
+  
+  .minimalArrow {
+    position: absolute;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    z-index: 10;
+  
+    span {
+      color: #ffffff;
+      opacity: 0.6;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 48px;
+      line-height: 1;
+    }
+  }
+  
+  /* ================================
+     3. Accordion
+     ================================ */
+  
+  .stackBlocks {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .accordionItem {
+    width: 100%;
+    overflow: hidden;
+    transition: filter 0.25s ease;
+  }
+  
+  /* backgrounds */
+  .aboutItem {
+    background: var(--white);
+  }
+  
+  .publicationsItem {
+    background: var(--pool);
+  }
+  
+  .newsItem {
+    background: var(--white);
+  }
+  
+  .contactItem {
+    background: var(--coral);
+  }
+  
+  /* title block */
+  .titleBlock {
+    width: 100%;
+    min-height: 25vh;
+    padding: 0 2rem;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: center;
+  
+    transition:
+      background-color 0.25s ease,
+      transform 0.25s ease;
+  }
+  
+  .titleBlockOpen {
+    transform: scale(1.01);
+  }
+  
+  /* title text */
+  .titleText {
+    width: 100%;
+    text-align: center;
+  
+    font-family: "DigitTech", monospace;
+    font-size: clamp(2.5rem, 6vw, 6rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--glass);
+  
+    transition:
+      text-shadow 0.25s ease,
+      opacity 0.25s ease,
+      transform 0.25s ease,
+      filter 0.25s ease;
+  }
+  
+  /* ABOUT / NEWS 保持普通 */
+  .aboutItem .titleText,
+  .newsItem .titleText {
+    filter: brightness(1);
+    text-shadow: none;
+  }
+  
+  /* PUBLICATIONS / CONTACT 固定亮文字 */
+  .publicationsItem .titleText,
+  .contactItem .titleText {
+    filter: brightness(5);
+    text-shadow:
+      0 0 2px rgba(255, 255, 255, 0.18),
+      0 0 8px rgba(255, 255, 255, 0.14);
+  }
+  
+  /* 打开时稍微再增强一点 */
+  .publicationsItem .titleBlockOpen .titleText,
+  .contactItem .titleBlockOpen .titleText {
+    filter: brightness(5);
+    text-shadow:
+      0 0 3px rgba(255, 255, 255, 0.22),
+      0 0 10px rgba(255, 255, 255, 0.18),
+      0 0 18px rgba(255, 255, 255, 0.12);
+  }
+  
+  /* content wrapper for smooth animation */
+  .contentOuter {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition:
+      grid-template-rows 0.45s ease,
+      opacity 0.35s ease;
+    opacity: 0;
+  }
+  
+  .contentOuterOpen {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  
+  .contentInner {
+    overflow: hidden;
+  }
+  
+  /* content full width */
+  .blockContent {
+    width: 100%;
+    padding: 0 2rem 3rem 2rem;
+  
+    font-family: sans-serif;
+    font-size: 1.08rem;
+    line-height: 1.85;
+    color: var(--glass);
+  
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(2px);
+  
+    transform: translateY(-10px);
+    transition: transform 0.4s ease;
+  }
+  
+  .contentOuterOpen .blockContent {
+    transform: translateY(0);
+  }
+  
+  .blockContent p {
+    max-width: 1100px;
+    margin: 0 auto 1rem auto;
+  }
+  
+  .blockContent p:last-child {
+    margin-bottom: 0;
+  }
+  
+  .blockContent ul {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-left: 1.25rem;
+  }
+  
+  .blockContent li {
+    margin-bottom: 0.75rem;
+  }
+  
+  .blockContent li:last-child {
+    margin-bottom: 0;
+  }
+  
+  .blockContent a {
+    color: var(--glass);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  
+  /* ================================
+     4. Responsive
+     ================================ */
+  
+  @media (max-width: 768px) {
+    .titleBlock {
+      min-height: 18vh;
+      padding: 0 1rem;
+    }
+  
+    .titleText {
+      font-size: clamp(1.5rem, 10vw, 2.5rem);
+      letter-spacing: 0.1em;
+    }
+  
+    .blockContent {
+      padding: 0 1.2rem 2rem 1.2rem;
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+  
+    .dotTitleWrap {
+      min-height: 120px;
+    }
+  
+    .bioInfoBox {
+      padding: 0 1rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+  
+    .minimalArrow span {
+      font-size: 36px;
+    }
+  }
+  
+  /* ================================
+     5. Animation
+     ================================ */
+  
+  @keyframes blinker {
+    0%,
+    100% {
+      opacity: 1;
+    }
+  
+    50% {
+      opacity: 0;
+    }
+  }
+
+  /* about card layout */
+
+.aboutCard {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 2rem;
+
+  align-items: center;
+}
+
+.profileImg {
+  width: 160px;
+  height: 160px;
+
+  object-fit: cover;
+
+  border-radius: 16px;
+
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+}
+
+.aboutIntro p {
+  margin-bottom: 1rem;
+}
+
+/* research chips */
+
+.researchChips {
+  margin-top: 1.5rem;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.researchChips span {
+  padding: 0.35rem 0.7rem;
+
+  font-size: 0.85rem;
+
+  border-radius: 999px;
+
+  background: rgba(0,0,0,0.08);
+
+  color: var(--glass);
+
+  font-family: "JetBrains Mono", monospace;
+
+  letter-spacing: 0.02em;
+}
+
+.pubNote {
+  max-width: 1100px;
+  margin: 0 auto 1.5rem auto;
+  font-size: 0.95rem;
+  font-style: italic;
+  opacity: 0.75;
+  color: var(--glass);
+}
+
+.pubGrid {
+  max-width: 860px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.pubCard {
+  width: 100%;
+  max-width: 760px;
+  margin-top: 1.5rem;
+
+
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--ink);
+  border-radius: 16px;
+  padding: 1rem 1rem 1.1rem 1rem;
+  min-height: 0;
+
+  box-shadow:
+    0 8px 20px rgba(11, 16, 32, 0.08),
+    0 2px 6px rgba(11, 16, 32, 0.06);
+
+  transform-origin: center center;
+  transition:
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+.pubCard:hover {
+  animation: cardSway 9s ease-in-out infinite;
+  box-shadow:
+    0 14px 28px rgba(11, 16, 32, 0.12),
+    0 4px 10px rgba(11, 16, 32, 0.08);
+}
+
+.pubMeta {
+  display: inline-block;
+  margin-bottom: 0.7rem;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--coral);
+}
+
+.pubCardTitle {
+  margin: 0 0 0.7rem 0;
+  font-size: 1rem;
+  line-height: 1.45;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.pubAuthors {
+  margin: 0 0 0.55rem 0;
+  font-size: 0.93rem;
+  line-height: 1.55;
+  color: rgba(11, 16, 32, 0.82);
+}
+
+.pubVenue {
+  margin: 0 0 0.9rem 0;
+  font-size: 0.94rem;
+  line-height: 1.5;
+  color: rgba(11, 16, 32, 0.82);
+}
+
+.pubLink {
+  display: inline-block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--glass);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+.pubLink:hover {
+  opacity: 0.75;
+}
+
+@keyframes cardSway {
+  0% {
+    transform: rotate(0deg) translateY(0);
+  }
+  20% {
+    transform: rotate(-0.9deg) translateY(-1px);
+  }
+  40% {
+    transform: rotate(0.8deg) translateY(0);
+  }
+  60% {
+    transform: rotate(-0.6deg) translateY(-1px);
+  }
+  80% {
+    transform: rotate(0.4deg) translateY(0);
+  }
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+}
