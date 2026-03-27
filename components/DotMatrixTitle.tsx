@@ -15,9 +15,8 @@ type Props = {
   colorBg?: string;
   hoverLift?: number;
   hoverRadius?: number;
-  // 扫描波参数
-  scanSpeed?: number;   
-  scanWidth?: number;   
+  scanSpeed?: number;
+  scanWidth?: number;
 };
 
 export default function DualColorDotMatrix({
@@ -34,8 +33,8 @@ export default function DualColorDotMatrix({
   colorBg = "#0b1020",
   hoverLift = 10,
   hoverRadius = 0,
-  scanSpeed = 0.8,      // 调整这个值改变波浪滑行速度
-  scanWidth = 15,        // 调整这个值改变波浪覆盖范围
+  scanSpeed = 0.8,
+  scanWidth = 15,
 }: Props) {
   const uid = useId();
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -43,13 +42,20 @@ export default function DualColorDotMatrix({
   const [dots, setDots] = useState([]);
   const [meta, setMeta] = useState({ w: 0, h: 0, cols: 0, rows: 0 });
   const [hoverCell, setHoverCell] = useState<{ c: number; r: number } | null>(null);
-  
-  // scanPos 初始设为负值，确保波浪从视窗左侧外开始出现
   const [scanPos, setScanPos] = useState(-20);
+  const [isMobile, setIsMobile] = useState(false);
 
   const fontFamily = "'JetBrains Mono', monospace";
 
-  // 1. 生成点阵数据 (Alpha 采样)
+  // 检测移动端
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // 1. 生成点阵数据
   useEffect(() => {
     const canvas = document.createElement("canvas");
     const ctx = canvas.getContext("2d");
@@ -105,23 +111,25 @@ export default function DualColorDotMatrix({
     setMeta({ w, h, cols, rows });
   }, [text1, text2, gap, fontSize, letterSpacing, colorAndy, colorYueWu, colorBg]);
 
-  // 2. 扫描动画循环 (Linear Scan)
+  // 2. 桌面端才运行扫描动画
   useEffect(() => {
+    if (isMobile) return;
+
     let frameId: number;
     const loop = () => {
       setScanPos((prev) => {
-        // 当波浪完全划过右侧边界，重置回左侧
         const limit = meta.cols > 0 ? meta.cols + scanWidth * 2 : 100;
-        if (prev > limit) return -scanWidth * 3; 
+        if (prev > limit) return -scanWidth * 3;
         return prev + scanSpeed;
       });
       frameId = requestAnimationFrame(loop);
     };
+
     frameId = requestAnimationFrame(loop);
     return () => cancelAnimationFrame(frameId);
-  }, [meta.cols, scanSpeed, scanWidth]);
+  }, [meta.cols, scanSpeed, scanWidth, isMobile]);
 
-  // 3. 事件处理函数 (修复 ReferenceError)
+  // 3. 事件处理函数
   const clientToSvg = (clientX: number, clientY: number) => {
     const svg = svgRef.current;
     if (!svg) return null;
@@ -134,24 +142,30 @@ export default function DualColorDotMatrix({
   };
 
   const onMove = (e: React.PointerEvent<SVGSVGElement>) => {
+    if (isMobile) return;
     if (!meta.cols || !meta.rows) return;
+
     const p = clientToSvg(e.clientX, e.clientY);
     if (!p) return;
+
     const c = Math.round((p.x - gap / 2) / gap);
     const r = Math.round((p.y - gap / 2) / gap);
-    setHoverCell({ 
-      c: Math.max(0, Math.min(meta.cols - 1, c)), 
-      r: Math.max(0, Math.min(meta.rows - 1, r)) 
+
+    setHoverCell({
+      c: Math.max(0, Math.min(meta.cols - 1, c)),
+      r: Math.max(0, Math.min(meta.rows - 1, r)),
     });
   };
 
-  const onLeave = () => setHoverCell(null);
+  const onLeave = () => {
+    if (isMobile) return;
+    setHoverCell(null);
+  };
 
   // 4. 计算最终位移
   const getTransform = (c: number, r: number) => {
-    // Hover 逻辑
     let hLift = 0;
-    if (hoverCell) {
+    if (!isMobile && hoverCell) {
       const d = Math.max(Math.abs(c - hoverCell.c), Math.abs(r - hoverCell.r));
       if (d === 0) hLift = hoverLift;
       else if (hoverRadius > 0 && d <= hoverRadius) {
@@ -159,13 +173,13 @@ export default function DualColorDotMatrix({
       }
     }
 
-    // 扫描波逻辑：一道从左到右的脉冲
     let sLift = 0;
-    const dist = Math.abs(c - scanPos);
-    if (dist < scanWidth) {
-      // 这里的 10 是波浪高度，可以自行调整
-      const strength = Math.cos((dist / scanWidth) * (Math.PI / 2));
-      sLift = Math.pow(strength, 2) * 10; 
+    if (!isMobile) {
+      const dist = Math.abs(c - scanPos);
+      if (dist < scanWidth) {
+        const strength = Math.cos((dist / scanWidth) * (Math.PI / 2));
+        sLift = Math.pow(strength, 2) * 10;
+      }
     }
 
     const totalY = -(hLift + sLift);
@@ -177,8 +191,8 @@ export default function DualColorDotMatrix({
       ref={svgRef}
       viewBox={`0 0 ${meta.w} ${meta.h}`}
       style={{ width: "100%", height: "auto", touchAction: "none" }}
-      onPointerMove={onMove}
-      onPointerLeave={onLeave}
+      onPointerMove={isMobile ? undefined : onMove}
+      onPointerLeave={isMobile ? undefined : onLeave}
     >
       {dots.map((dot, i) => (
         <circle
@@ -190,10 +204,8 @@ export default function DualColorDotMatrix({
           fillOpacity={dot.isBig ? 1 : 0.2}
           transform={getTransform(dot.c, dot.r)}
           style={{
-            // 平时自动波浪不需要 transition 否则会卡顿
-            // 仅在 Hover 时启用平滑过渡
-            transition: hoverCell ? "transform 150ms ease-out" : "none",
-            willChange: "transform",
+            transition: !isMobile && hoverCell ? "transform 150ms ease-out" : "none",
+            willChange: !isMobile ? "transform" : "auto",
           }}
         />
       ))}
